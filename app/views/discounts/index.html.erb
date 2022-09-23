@@ -1,0 +1,14 @@
+<h1>Bulk Discounts for <%= @merchant.name %></h1>
+
+<div id="merchant-<%= @merchant.id%>-discounts">
+  <h2> Avalible Discounts:</h2>
+    <ol>
+      <% @discounts.each do |discount| %>
+        <div id="discount-<%= discount.id%>">
+          <li><%= link_to "Discount: #{(discount.discount*100).round(0)}%", merchant_discount_path(@merchant, discount) %>
+            <p>Minumum Order Quantity: <%= discount.threshold %></p>
+          </li>
+        </div>
+      <% end %>
+    </ol>
+</div>
