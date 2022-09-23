@@ -18,16 +18,17 @@
     <% end %>
     <%= yield %>
   </body>
-  <footer>
+  <footer style="padding:100px 0px;">
   <p>Repo Name: <%= RepoSearch.all_repos.name %> </p>
   <p>Total Merged Pull Requests: <%= RepoSearch.total_merged_pulls.total_count %> </p>
-  <p>Contributors:</p>
+  <p>Contributors:
   <% RepoSearch.users.each do |user|  %>
-    <p>
+  <span style="padding:0px 20px;">
     <% if user.login != "BrianZanti" %>
       <%= user.login %> has <%= user.commits %> commits on repo
     <% end %>
-    </p>
   <% end %>
+  </p>
+  </span>
   </footer>
 </html>
