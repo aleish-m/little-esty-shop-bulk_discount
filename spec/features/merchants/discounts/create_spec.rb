@@ -27,12 +27,23 @@ RSpec.describe 'Merchant Bulk Discounts Create' do
         fill_in "Discount Percentage:", with: "0.25"
         fill_in "Minimum Order Quantity:", with: "10"
         click_button "Create Discount"
-        
+
         expect(current_path).to eq(merchant_discounts_path(@merchant_1))
       end
 
       it 'I see my new bulk discount listed' do
+        visit new_merchant_discount_path(@merchant_1)
+
+        fill_in "Discount Percentage:", with: "0.25"
+        fill_in "Minimum Order Quantity:", with: "10"
+        click_button "Create Discount"
+
         visit merchant_discounts_path(@merchant_1)
+
+        within("#merchant-#{@merchant_1.id}-discounts") do
+          expect(page).to have_content("Discount: 25%")
+          expect(page).to have_content("Minumum Order Quantity: 10")
+        end
       end
     end
   end
