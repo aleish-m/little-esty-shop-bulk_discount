@@ -1,14 +1,14 @@
 <h1>Dashboard</h1>
   <h2><%= @merchant.name %></h2>
-  <p>
-    <%= link_to "Items Index", merchant_items_path(@merchant) %>
-  </p>
-  <p>
-    <%= link_to "Invoices Index", merchant_invoices_path(@merchant) %>
-  </p>
-  <p>
-    <%= link_to "Veiw Your Avalible Discounts", merchant_discounts_path(@merchant) %>
-  </p>
+    <p>
+      <%= link_to "Items Index", merchant_items_path(@merchant) %>
+    </p>
+    <p>
+      <%= link_to "Invoices Index", merchant_invoices_path(@merchant) %>
+    </p>
+    <p>
+      <%= link_to "Veiw Your Avalible Discounts", merchant_discounts_path(@merchant) %>
+    </p>
 
   <div id="top-5-customers">
     <h2>Top 5 Customers:</h2>
@@ -22,7 +22,9 @@
   <div id="items-not-shipped">
     <% @merchant.items_not_shipped_sorted_by_date.each do |invoice| %>
       <% invoice.items.each do |item| %>
-        <p id="<%= item.id %>"> <%= item.name %> - <%= invoice.created_at.strftime("%A, %B %d, %Y") %> - Invoice ID: <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %> </p>
+        <p id="<%= item.id %>"> 
+          <%= item.name %> - <%= invoice.created_at.strftime("%A, %B %d, %Y") %> - Invoice ID: <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %> 
+        </p>
       <% end %>
     <% end %>
   </div>
