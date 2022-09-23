@@ -1,23 +1,28 @@
 <h1>Dashboard</h1>
-<%= @merchant.name %>
+  <h2><%= @merchant.name %></h2>
+  <p>
+    <%= link_to "Items Index", merchant_items_path(@merchant) %>
+  </p>
+  <p>
+    <%= link_to "Invoices Index", merchant_invoices_path(@merchant) %>
+  </p>
+  <p>
+    <%= link_to "Veiw Your Avalible Discounts", merchant_discounts_path(@merchant) %>
+  </p>
 
-<%= link_to "Items Index", "/merchants/#{@merchant.id}/items" %>
-<br>
-<%= link_to "Invoices Index", "/merchants/#{@merchant.id}/invoices" %>
+  <div id="top-5-customers">
+    <h2>Top 5 Customers:</h2>
+      <% @best_customers.each do |customer| %>
+        <p id="<%= customer.id %>"><%= customer.first_name %> <%= customer.last_name %> - Successful Transactions: <%= customer.success_count %></p>
+      <% end %>
+  </div>
 
-<div id="top-5-customers">
-<h2>Top 5 Customers:</h2>
-<% @best_customers.each do |customer| %>
-  <p id="<%= customer.id %>"><%= customer.first_name %> <%= customer.last_name %> - Successful Transactions: <%= customer.success_count %></p>
-<% end %>
-</div>
+  <h3>Items Ready to Ship:</h3>
 
-<h3>Items Ready to Ship:</h3>
-
-<div id="items-not-shipped">
-  <% @merchant.items_not_shipped_sorted_by_date.each do |invoice| %>
-    <% invoice.items.each do |item| %>
-      <p id="<%= item.id %>"> <%= item.name %> - <%= invoice.created_at.strftime("%A, %B %d, %Y") %> - Invoice ID: <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %> </p>
+  <div id="items-not-shipped">
+    <% @merchant.items_not_shipped_sorted_by_date.each do |invoice| %>
+      <% invoice.items.each do |item| %>
+        <p id="<%= item.id %>"> <%= item.name %> - <%= invoice.created_at.strftime("%A, %B %d, %Y") %> - Invoice ID: <%= link_to "#{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %> </p>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
