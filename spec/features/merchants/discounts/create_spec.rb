@@ -27,7 +27,7 @@ RSpec.describe 'Merchant Bulk Discounts Create' do
         fill_in "Discount Percentage:", with: "0.25"
         fill_in "Minimum Order Quantity:", with: "10"
         click_button "Create Discount"
-
+        
         expect(current_path).to eq(merchant_discounts_path(@merchant_1))
       end
 
