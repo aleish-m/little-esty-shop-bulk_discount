@@ -12,7 +12,7 @@ RSpec.describe 'Merchant Bulk Discounts Index' do
     @discount_3 = create(:discount, merchant:@merchant_2)
   end
     describe 'When I visit my merchant dashboard' do
-      it 'I see a link to view all my discounts. W~hen I click this link, I am taken to my bulk discounts index page' do
+      it 'I see a link to view all my discounts. When I click this link, I am taken to my bulk discounts index page' do
         visit merchant_dashboard_path(@merchant_1)
 
         click_link "Veiw Your Avalible Discounts"
