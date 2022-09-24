@@ -1,5 +1,6 @@
 <h1>Discount Info</h1>
 
-<div>
-  
+<div id="discount-<%= @discount.id %>-details">
+  <p>Discount: <%= (@discount.discount*100).round(0) %>%</p>
+  <p>Minumum Order Quantity: <%= @discount.threshold %></p>
 </div>
