@@ -16,15 +16,12 @@ RSpec.describe 'Merchant Bulk Discounts Show' do
         visit merchant_discount_path(@merchant_1, @discount_1)
 
         within("#discount-#{@discount_1.id}-details") do
-            expect(page).to have_content("Discount: #{(@discount_1.discount*100).round(0)}%")
-            expect(page).to have_content("Minumum Order Quantity: #{@discount_1.threshold}")
-          end
+          expect(page).to have_content("Discount: #{(@discount_1.discount*100).round(0)}%")
+          expect(page).to have_content("Minumum Order Quantity: #{@discount_1.threshold}")
+        end
          
-          expect(page).to_not have_content("Discount: #{(@discount_2.discount*100).round(0)}%")
-          expect(page).to_not have_content("Minumum Order Quantity: #{@discount_2.threshold}")
-         
-
-
+        expect(page).to_not have_content("Discount: #{(@discount_2.discount*100).round(0)}%")
+        expect(page).to_not have_content("Minumum Order Quantity: #{@discount_2.threshold}")
       end
     end
   end
