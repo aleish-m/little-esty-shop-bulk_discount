@@ -37,7 +37,6 @@ RSpec.describe 'Merchant Bulk Discounts Delete' do
         end
 
         expect(current_path).to eq(merchant_discounts_path(@merchant_1))
-
       end
 
       it 'I no longer see the discount listed' do 
@@ -59,7 +58,6 @@ RSpec.describe 'Merchant Bulk Discounts Delete' do
             expect(page).to have_button "Delete Discount"
           end
         end
-
       end
     end
   end
