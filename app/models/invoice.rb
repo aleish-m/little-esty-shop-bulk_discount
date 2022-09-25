@@ -36,13 +36,13 @@ class Invoice < ApplicationRecord
       items.total_revenue_of_all_items
     end
 
-    def discount 
+    def discount_amount 
       items.joins(:invoice_items, :discounts).where('invoice_items.quantity >= discounts.threshold').group(:id).select('items.*, max(invoice_items.quantity * invoice_items.unit_price * discounts.discount) as discount_amount').sum(&:discount_amount)
     end
 
     def discounted_revenue_of_invoice
-      total_revenue_of_invoice - discount
       # require "pry"; binding.pry
+      total_revenue_of_invoice - discount_amount
       # items.discount_revenue
 
       # items.joins(:discounts, :invoice_items).group('invoice_items.id').where(:quantity >= :threshold)
