@@ -49,4 +49,8 @@ class Item < ApplicationRecord
     .sum('(invoice_items.unit_price * invoice_items.quantity)')
   end
 
+  # def self.discount_revenue
+  #   require "pry"; binding.pry
+  # end
+
 end
