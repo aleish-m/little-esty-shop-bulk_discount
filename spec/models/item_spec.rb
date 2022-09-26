@@ -76,13 +76,20 @@ RSpec.describe Item, type: :model do
 
   describe 'instance methods' do
     before :each do
-      @item_1 = create(:item)
-      @item_2 = create(:item)
+      @merchant_1 = create(:merchant)
+      
+      @item_1 = create(:item, name: "item_1", merchant: @merchant_1)
+      @item_2 = create(:item, name: "item_2", merchant: @merchant_1)
+      @item_3 = create(:item, name: "item_3", merchant: @merchant_1)
 
       @invoice_1 = create(:invoice)
 
-      @invoice_item_1 = create(:invoice_items, invoice_id: @invoice_1.id, item_id: @item_1.id)
-      @invoice_item_2 = create(:invoice_items, invoice_id: @invoice_1.id, item_id: @item_2.id)
+      @invoice_item_1 = create(:invoice_items, invoice: @invoice_1, item: @item_1, unit_price: 1000, quantity: 10)
+      @invoice_item_2 = create(:invoice_items, invoice: @invoice_1, item: @item_2, unit_price: 700, quantity: 7)
+      @invoice_item_3 = create(:invoice_items, invoice: @invoice_1, item: @item_3, unit_price: 700, quantity: 5)
+
+      @discount_1 = create(:discount, discount: 0.25, threshold: 7, merchant: @merchant_1)
+      @discount_2 = create(:discount, discount: 0.5, threshold: 8, merchant: @merchant_1)
     end
 
     it "#quantity_purchased" do
@@ -102,6 +109,12 @@ RSpec.describe Item, type: :model do
 
     it "#item-revenue" do
       expect(@item_10.revenue).to eq(50000)
+    end
+
+    it "#find_discount" do
+      expect(@item_1.find_discount).to eq(@discount_2)
+      expect(@item_2.find_discount).to eq(@discount_1)
+      expect(@item_3.find_discount).to eq(nil)
     end
   end
 end
