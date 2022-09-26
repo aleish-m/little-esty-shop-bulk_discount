@@ -249,7 +249,6 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
     it 'I see the total revenue for my merchant from this invoice (not including discounts)' do
       visit merchant_invoice_path(@merchant_1, @invoice_1)
-      # require "pry"; binding.pry
       within("#invoice-revenue") do
         expect(page).to have_content(24500)
       end
@@ -262,26 +261,17 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
     it 'I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation' do
       visit merchant_invoice_path(@merchant_1, @invoice_1)
+      save_and_open_page
       within("#invoice-revenue") do
-        expect(page).to have_content(12250)
+        expect(page).to have_content(@invoice_1.discounted_revenue_of_invoice)
       end
 
       visit merchant_invoice_path(@merchant_1, @invoice_2)
       within("#invoice-revenue") do
-        expect(page).to have_content(7275)
+        expect(page).to have_content(@invoice_2.discounted_revenue_of_invoice)
       end
 
     end
 
   end
 end
-
-### Current 
-# As a merchant
-# When I visit my merchant invoice show page
-# Then I see the total revenue that will be generated from all of my items on the invoice
-
-# As a merchant
-# When I visit my merchant invoice show page
-# Then I see the total revenue for my merchant from this invoice (not including discounts)
-# And I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation
