@@ -3,4 +3,5 @@
 <div id="discount-<%= @discount.id %>-details">
   <p>Discount: <%= (@discount.discount*100).round(0) %>%</p>
   <p>Minumum Order Quantity: <%= @discount.threshold %></p>
+  <%= button_to "Edit Discount Info", edit_merchant_discount_path(@merchant, @discount), method: :get %>
 </div>
