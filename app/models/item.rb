@@ -52,5 +52,4 @@ class Item < ApplicationRecord
   def find_discount
     discounts.joins(merchant:[:invoice_items]).where('discounts.threshold <= invoice_items.quantity').where(invoice_items: {item_id: self.id}).order(discount: :desc).limit(1).first
   end
-
 end

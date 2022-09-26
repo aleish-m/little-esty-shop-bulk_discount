@@ -1,8 +1,8 @@
 <h2>Invoice Id: <%= @invoice.id %> Show Page </h2>
 
 <div id="invoice-revenue">
-  <p>Total Non-Discounted Revenue: <%= @invoice.items.total_revenue_of_all_items %></p>
-  <p>Total Discounted Revenue: <%= @invoice.discounted_revenue_of_invoice %></p>
+  <p>Total Non-Discounted Revenue: <%= number_to_currency(@invoice.items.total_revenue_of_all_items/100.00) %></p>
+  <p>Total Discounted Revenue: <%= number_to_currency(@invoice.discounted_revenue_of_invoice/100.00) %></p>
 </div>
 
 <div id="invoice-info">
@@ -13,9 +13,10 @@
 </div>
 
 <div id="invoice-items-info">
+
   <% @invoice.items.each do |item| %>
     <p>Item Name: <%= item.name %></p>
-    <p>Item Price: <%= item.unit_price %></p>
+    <p>Item Price: <%= number_to_currency(item.unit_price/100.00) %></p>
     <p>Item Quantity: <%= item.quantity_purchased(@invoice.id) %></p>
     <p>Item Shipping Status: <%= item.shipping_status(@invoice.id) %>  
       <p id="item-<%= item.id %>-discount">
@@ -24,6 +25,7 @@
       <% end %>
       </p>
     </p>
+
     <%= form_with model: [@merchant, @invoice], local: true do |form| %>
       <%= form.label :item_id %>
       <%= form.hidden_field :item_id, value: "#{item.id}" %>
