@@ -52,22 +52,22 @@ RSpec.describe 'Merchant Invoice Show Page' do
 
       within("#invoice-items-info") do
         expect(page).to have_content(@item_1.name)
-        expect(page).to have_content(@item_1.unit_price)
+        expect(page).to have_content((@item_1.unit_price/100.00).to_s(:delimited))
         expect(page).to have_content(@invoice_items_1.status)
         expect(page).to have_content(@invoice_items_1.quantity)
         expect(page).to_not have_content(@item_2.name)
-        expect(page).to_not have_content(@item_2.unit_price)
+        expect(page).to_not have_content((@item_2.unit_price/100.00).to_s(:delimited))
       end
 
       visit merchant_invoice_path(@merchant_2, @invoice_2)
 
       within("#invoice-items-info") do
         expect(page).to have_content(@item_2.name)
-        expect(page).to have_content(@item_2.unit_price)
+        expect(page).to have_content((@item_2.unit_price/100.00).to_s(:delimited))
         expect(page).to have_content(@invoice_items_2.status)
         expect(page).to have_content(@invoice_items_2.quantity)
         expect(page).to_not have_content(@item_1.name)
-        expect(page).to_not have_content(@item_1.unit_price)
+        expect(page).to_not have_content((@item_1.unit_price/100.00).to_s(:delimited))
       end
     end
   end
@@ -160,25 +160,25 @@ RSpec.describe 'Merchant Invoice Show Page' do
       visit merchant_invoice_path(@merchant_1, @invoice_1)
       
       within "#invoice-revenue" do
-        expect(page).to have_content(@invoice_1.items.total_revenue_of_all_items)
+        expect(page).to have_content((@invoice_1.items.total_revenue_of_all_items/100.00).to_s(:delimited))
       end
 
       visit merchant_invoice_path(@merchant_1, @invoice_2)
 
       within "#invoice-revenue" do
-        expect(page).to have_content(@invoice_2.items.total_revenue_of_all_items)
+        expect(page).to have_content((@invoice_2.items.total_revenue_of_all_items/100.00).to_s(:delimited))
       end
 
       visit merchant_invoice_path(@merchant_1, @invoice_3)
 
       within "#invoice-revenue" do
-        expect(page).to have_content(@invoice_3.items.total_revenue_of_all_items)
+        expect(page).to have_content((@invoice_3.items.total_revenue_of_all_items/100.00).to_s(:delimited))
       end
 
       visit merchant_invoice_path(@merchant_1, @invoice_4)
 
       within "#invoice-revenue" do
-        expect(page).to have_content(@invoice_4.items.total_revenue_of_all_items)
+        expect(page).to have_content((@invoice_4.items.total_revenue_of_all_items/100.00).to_s(:delimited))
       end
     end
   end
@@ -216,12 +216,12 @@ RSpec.describe 'Merchant Invoice Show Page' do
     it 'I see the total revenue for my merchant from this invoice (not including discounts)' do
       visit merchant_invoice_path(@merchant_1, @invoice_1)
       within("#invoice-revenue") do
-        expect(page).to have_content(24500)
+        expect(page).to have_content((@invoice_1.items.total_revenue_of_all_items/100.00).to_s(:delimited))
       end
 
       visit merchant_invoice_path(@merchant_1, @invoice_2)
       within("#invoice-revenue") do
-        expect(page).to have_content(8500)
+        expect(page).to have_content((@invoice_2.items.total_revenue_of_all_items/100.00).to_s(:delimited))
       end
     end
 
@@ -229,12 +229,12 @@ RSpec.describe 'Merchant Invoice Show Page' do
       visit merchant_invoice_path(@merchant_1, @invoice_1)
       save_and_open_page
       within("#invoice-revenue") do
-        expect(page).to have_content(@invoice_1.discounted_revenue_of_invoice)
+        expect(page).to have_content((@invoice_1.discounted_revenue_of_invoice/100.00).to_s(:delimited))
       end
 
       visit merchant_invoice_path(@merchant_1, @invoice_2)
       within("#invoice-revenue") do
-        expect(page).to have_content(@invoice_2.discounted_revenue_of_invoice)
+        expect(page).to have_content((@invoice_2.discounted_revenue_of_invoice/100.00).to_s(:delimited))
       end
     end
 
