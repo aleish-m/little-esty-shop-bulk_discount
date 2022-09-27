@@ -1,7 +1,19 @@
 <h2>Little Esty Shop</h2>
 
+<div style="font-size:15px; text-align:left;">
+    <span style="padding:10px; padding:10px;"><%= link_to "Merchant Dashboard", "/merchants/1/dashboard" %></span>
+    <span style="padding:10px; padding:10px;"><%= link_to "Merchant Item Index", "/merchants/1/items" %></span>
+    <span style="padding:10px; padding:10px;"><%= link_to "Merchant Invoice Index", "/merchants/1/invoices" %></span>
+</div>
+
+<div style="font-size:15px; text-align:right;">
+    <span style="padding:10px; padding:10px;"><%= link_to "Admin Dashboard", "/admin/" %></span>
+    <span style="padding:10px; padding:10px;"><%= link_to "Admin Merchant Index", "/admin/merchants" %></span>
+    <span style="padding:10px; padding:10px;"><%= link_to "Admin Invoice Index", "/admin/invoices" %></span>
+</div>
+
 <h3><i>A group project by Aleisha, Sandy, Erik, and Ken</i><h3>
 
-<p>
+<p>git checkout
   The time is now: <%= Time.now %>
 </p>
