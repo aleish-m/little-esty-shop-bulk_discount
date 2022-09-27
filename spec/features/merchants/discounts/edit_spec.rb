@@ -14,10 +14,10 @@ RSpec.describe 'Merchant Bulk Discount Edit' do
     describe 'When I visit my bulk discount show page' do
       it 'I see a link to edit the bulk discount , when I click this link I am taken to a new page with a form to edit the discount' do
         visit merchant_discount_path(@merchant_1, @discount_1)
-
+        
         within("#discount-#{@discount_1.id}-details")do
           click_button("Edit Discount Info")
-
+          save_and_open_page
           expect(current_path).to eq(edit_merchant_discount_path(@merchant_1, @discount_1))
         end
       end
