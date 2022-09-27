@@ -119,8 +119,7 @@ RSpec.describe "Admin Invoice Show Page" do
 
           it 'I see the total revenue for my merchant from this invoice (not including discounts)' do
             visit admin_invoice_path(@invoice_1)
-            save_and_open_page
-
+            
             within("#invoice-details-#{@invoice_1.id}") do
               within("#invoice-revenue") do
                 expect(page).to have_content((@invoice_1.total_revenue_of_invoice/100.00).to_s(:delimited))

@@ -23,6 +23,7 @@ RSpec.describe 'Merchant Bulk Discounts Index' do
     describe 'I am taken to my bulk discounts index page' do
       it 'I see all of my bulk discounts including their percentage discount and quantity thresholds' do
         visit merchant_discounts_path(@merchant_1)
+        save_and_open_page
         
         within("#merchant-#{@merchant_1.id}-discounts") do
           within("#discount-#{@discount_1.id}") do
