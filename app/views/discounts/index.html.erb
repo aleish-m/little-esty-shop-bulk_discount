@@ -3,8 +3,8 @@
 <div id="upcoming-holidays">
   <h2>Upcoming Holidays:</h2>
     <ol>  
-      <% HolidaySearch.holidays.each do |holiday| %>
-        <li><%= holiday.name %> is coming up on <%= holiday.date %></li>
+      <% @holidays.each do |holiday| %>
+        <li><%= holiday.name %> is on <%= holiday.date %></li>
       <% end %>
     </ol>
 </div>

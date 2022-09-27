@@ -5,3 +5,4 @@ class HolidaySearch
       Holiday.new(holiday)
     end
   end
+end
