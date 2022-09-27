@@ -17,6 +17,7 @@ class DiscountsController < ApplicationController
   def create
     merchant = Merchant.find(params[:merchant_id])
     @discount = merchant.discounts.new(discount_params)
+    
     if @discount.save 
       flash.notice = "Discount was successfully added!"
       redirect_to(merchant_discounts_path(merchant))
@@ -41,8 +42,14 @@ class DiscountsController < ApplicationController
   def update
     discount = Discount.find(params[:id])
     merchant = Merchant.find(params[:merchant_id])
-    discount.update(discount_params)
-    redirect_to(merchant_discount_path(merchant, discount))
+
+    if discount.update(discount_params)
+      flash.notice = "Discount was successfully updated!"
+      redirect_to(merchant_discount_path(merchant, discount))
+    else
+      flash.alert = discount.errors.full_messages.to_sentence
+      redirect_to(edit_merchant_discount_path(merchant, discount))
+    end
   end
 
 

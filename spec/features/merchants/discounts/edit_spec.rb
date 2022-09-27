@@ -17,7 +17,7 @@ RSpec.describe 'Merchant Bulk Discount Edit' do
         
         within("#discount-#{@discount_1.id}-details")do
           click_button("Edit Discount Info")
-          save_and_open_page
+          
           expect(current_path).to eq(edit_merchant_discount_path(@merchant_1, @discount_1))
         end
       end
@@ -25,10 +25,10 @@ RSpec.describe 'Merchant Bulk Discount Edit' do
       it "I see that the discounts current attributes are pre-poluated in the form, when I change any/all of the information and click submit I am redirected to the bulk discount's show page" do
         visit edit_merchant_discount_path(@merchant_1, @discount_1) 
 
-        expect(page).to have_field("Discount Percentage:", with: "#{@discount_1.discount.round(3)}")
+        expect(page).to have_field("Discount Percentage (as decimal):", with: "#{@discount_1.discount.round(3)}")
         expect(page).to have_field("Minimum Order Quantity:", with: "#{@discount_1.threshold}")
 
-        fill_in "Discount Percentage:", with: "0.25"
+        fill_in "Discount Percentage (as decimal):", with: "0.25"
         fill_in "Minimum Order Quantity:", with: "10"
         click_button "Update Discount"
 
@@ -38,7 +38,7 @@ RSpec.describe 'Merchant Bulk Discount Edit' do
       it "When I am redirected to the bulk discount's show page, and I see that the discount's attributes have been updated" do
         visit edit_merchant_discount_path(@merchant_1, @discount_1) 
 
-        fill_in "Discount Percentage:", with: "0.25"
+        fill_in "Discount Percentage (as decimal):", with: "0.25"
         fill_in "Minimum Order Quantity:", with: "10"
         click_button "Update Discount"
 

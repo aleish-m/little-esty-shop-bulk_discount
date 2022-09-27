@@ -24,7 +24,7 @@ RSpec.describe 'Merchant Bulk Discounts Create' do
       it 'I fill in the form with valid data I am redirected back to the bulk discount index' do
         visit new_merchant_discount_path(@merchant_1)
 
-        fill_in "Discount Percentage:", with: "0.25"
+        fill_in "Discount Percentage (as decimal):", with: "0.25"
         fill_in "Minimum Order Quantity:", with: "10"
         click_button "Create Discount"
 
@@ -34,7 +34,7 @@ RSpec.describe 'Merchant Bulk Discounts Create' do
       it 'I see my new bulk discount listed' do
         visit new_merchant_discount_path(@merchant_1)
 
-        fill_in "Discount Percentage:", with: "0.25"
+        fill_in "Discount Percentage (as decimal):", with: "0.25"
         fill_in "Minimum Order Quantity:", with: "10"
         click_button "Create Discount"
 
