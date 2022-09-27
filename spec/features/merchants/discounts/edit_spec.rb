@@ -47,6 +47,40 @@ RSpec.describe 'Merchant Bulk Discount Edit' do
           expect(page).to have_content(10)
         end
       end
+
+      it "When I am redirected to the bulk discount's show page I see a message telling me the discount was updated" do
+        visit edit_merchant_discount_path(@merchant_1, @discount_1) 
+
+        fill_in "Discount Percentage (as decimal):", with: "0.25"
+        fill_in "Minimum Order Quantity:", with: "10"
+        click_button "Update Discount"
+
+        expect(page).to have_content("Discount was successfully updated!")
+      
+      end
+
+      it "When I am redirected to the bulk discount's show page I see a message telling me the discount was updated" do
+        visit edit_merchant_discount_path(@merchant_1, @discount_1) 
+
+        fill_in "Discount Percentage (as decimal):", with: "2"
+        fill_in "Minimum Order Quantity:", with: "10"
+        click_button "Update Discount"
+
+        expect(current_path).to eq(edit_merchant_discount_path(@merchant_1, @discount_1))
+        expect(page).to have_content("Discount must be less than or equal to 1")
+      end
+
+      it "When I am redirected to the bulk discount's show page I see a message telling me the discount was updated" do
+        visit edit_merchant_discount_path(@merchant_1, @discount_1) 
+
+        fill_in "Discount Percentage (as decimal):", with: "A"
+        fill_in "Minimum Order Quantity:", with: "A"
+        click_button "Update Discount"
+
+        expect(current_path).to eq(edit_merchant_discount_path(@merchant_1, @discount_1))
+        expect(page).to have_content("Threshold is not a number")
+        expect(page).to have_content("Discount is not a number")
+      end
     end
   end
 end
