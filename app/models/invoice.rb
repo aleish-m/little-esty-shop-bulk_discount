@@ -37,17 +37,11 @@ class Invoice < ApplicationRecord
     end
 
     def discount_amount
-      items.joins(:invoice_items, :discounts).where('invoice_items.quantity >= discounts.threshold').group(:id).maximum('(invoice_items.quantity * invoice_items.unit_price * discounts.discount)').sum{|x,y| y}
-
-      # items.joins(:invoice_items, :discounts).where('invoice_items.quantity >= discounts.threshold').group(:id).select('items.*, max(invoice_items.quantity * invoice_items.unit_price * discounts.discount) as discount_amount').sum(&:discount_amount)
+      Invoice.from(items.joins(:invoice_items, :discounts).where('invoice_items.quantity >= discounts.threshold').group(:id).select('items.*, max(invoice_items.quantity * invoice_items.unit_price * discounts.discount) as discount_amount')).sum(:discount_amount)
     end
 
     def discounted_revenue_of_invoice
-      if discount_amount != nil
-        total_revenue_of_invoice - discount_amount
-      else
-        total_revenue_of_invoice
-      end
+      total_revenue_of_invoice - discount_amount
     end
     
 end
