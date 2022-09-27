@@ -59,7 +59,7 @@ RSpec.describe 'Merchant Bulk Discount Edit' do
       
       end
 
-      it "When I am redirected to the bulk discount's show page I see a message telling me the discount was updated" do
+      it "When I input an incorrect discount percentage I am redirected back to the the bulk discount's edit page I see a message telling me I entered an incorrect value" do
         visit edit_merchant_discount_path(@merchant_1, @discount_1) 
 
         fill_in "Discount Percentage (as decimal):", with: "2"
@@ -70,7 +70,18 @@ RSpec.describe 'Merchant Bulk Discount Edit' do
         expect(page).to have_content("Discount must be less than or equal to 1")
       end
 
-      it "When I am redirected to the bulk discount's show page I see a message telling me the discount was updated" do
+      it "When don't fill in the discount fields I am redirected back to the the bulk discount's edit page I see a message telling me I feilds cannot be blank" do
+        visit edit_merchant_discount_path(@merchant_1, @discount_1) 
+
+        fill_in "Discount Percentage (as decimal):", with: ""
+        fill_in "Minimum Order Quantity:", with: ""
+        click_button "Update Discount"
+
+        expect(current_path).to eq(edit_merchant_discount_path(@merchant_1, @discount_1))
+        expect(page).to have_content("Discount can't be blank, Discount is not a number, Threshold can't be blank, and Threshold is not a number")
+      end
+
+      it "When I input a non-numarical value in either discount form field I am redirected back to the the bulk discount edit page I see a message telling me I feilds must be numbers" do
         visit edit_merchant_discount_path(@merchant_1, @discount_1) 
 
         fill_in "Discount Percentage (as decimal):", with: "A"
