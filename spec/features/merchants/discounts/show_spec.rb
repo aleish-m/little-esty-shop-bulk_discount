@@ -7,9 +7,9 @@ RSpec.describe 'Merchant Bulk Discounts Show' do
     @merchant_2 = create(:merchant)
     @merchant_3 = create(:merchant)
 
-    @discount_1 = create(:discount, merchant:@merchant_1)
-    @discount_2 = create(:discount, merchant:@merchant_1)
-    @discount_3 = create(:discount, merchant:@merchant_2)
+    @discount_1 = create(:discount, merchant:@merchant_1, threshold: 8)
+    @discount_2 = create(:discount, merchant:@merchant_1, threshold: 10)
+    @discount_3 = create(:discount, merchant:@merchant_2, threshold: 6)
   end
     describe 'When I visit my bulk discount show page' do
       it "Then I see the bulk discount's quantity threshold and the percentage discount" do
