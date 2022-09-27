@@ -1,0 +1,8 @@
+<%= form_with model: [@merchant, @discount], local: true  do |form| %>
+<h2>Create A New Discount:</h2>
+    <%= form.label :discount, "Discount Percentage:" %>
+    <%= form.text_field :discount, placeholder: '0.75'%>
+    <%= form.label :threshold, "Minimum Order Quantity:" %>
+    <%= form.text_field :threshold, placeholder:'12'%>
+    <%= form.submit %>
+<% end %>
