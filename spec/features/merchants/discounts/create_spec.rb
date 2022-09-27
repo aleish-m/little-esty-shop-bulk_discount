@@ -85,7 +85,7 @@ RSpec.describe 'Merchant Bulk Discounts Create' do
 
         fill_in "Discount Percentage (as decimal):", with: ""
         fill_in "Minimum Order Quantity:", with: ""
-        click_button "Update Discount"
+        click_button "Create Discount"
 
         expect(current_path).to eq(new_merchant_discount_path(@merchant_1))
         expect(page).to have_content("Discount can't be blank, Discount is not a number, Threshold can't be blank, and Threshold is not a number")
