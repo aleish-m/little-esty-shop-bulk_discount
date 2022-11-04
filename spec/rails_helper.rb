@@ -1,5 +1,3 @@
-require 'simplecov'
-SimpleCov.start
 require 'support/factory_bot.rb'
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
